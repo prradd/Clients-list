@@ -1,0 +1,31 @@
+body {
+  direction: rtl;
+  font-family: Heebo;
+}
+
+main {
+  align-content: center;
+  margin: auto;
+  width: 70%;
+}
+
+.clientListTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.clientListTable td th {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.clientListTable td {
+  height: 60px;
+
+}
+.clientListTable th {
+  font-weight: bold;
+  background-color: #efefef;
+  text-align: right;
+  height: 40px;
+}

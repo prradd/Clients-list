@@ -18,6 +18,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.22",
     "ts-mongoose": "0.0.21",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.6"
   },
   "devDependencies": {

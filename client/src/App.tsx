@@ -1,18 +1,27 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AppNavbar from "./components/AppNavbar";
 import  DataTable from './components/DataTable';
 
-const App: React.FC = () => {
+
+const App = () => {
 
   return (
-      <main>
-          <h1>ניהול משימות</h1>
-          <div>
-              חיפוש
-          </div>
-          <DataTable></DataTable>
-      </main>
-
+      <Fragment>
+          <nav>
+              <div>
+                  <AppNavbar />
+              </div>
+          </nav>
+          <main>
+              <h1>ניהול משימות</h1>
+              <div>
+                  חיפוש
+              </div>
+              <DataTable></DataTable>
+          </main>
+      </Fragment>
   );
 }
 

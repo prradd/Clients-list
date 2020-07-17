@@ -1,6 +1,9 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Table, Container, Row, Col, Button} from "reactstrap";
-import {v1 as uuid} from "uuid";
+
+import {useDispatch, useSelector} from "react-redux";
+import {deleteClient, getClients} from "../actions/clientActions";
+
 
 interface ClientObject {
     id: string;
@@ -13,13 +16,21 @@ interface ClientObject {
 
 const DataTable = () => {
 
-    const [clients, setClients] = useState<Array<ClientObject>>([
-        {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-        {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-        {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-        {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-        {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    ])
+    // const [users, setUsers] = useState<Array<ClientObject>>([
+    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
+    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
+    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
+    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
+    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
+    // ])
+    console.log(getClients());
+
+
+    const clients = useSelector((state:any) => state.client.clients);
+
+    const onDeleteClick = (id: string) => {
+        deleteClient(id);
+    }
 
     const renderTableData = () => {
         return clients.map((client: ClientObject) => {
@@ -34,9 +45,7 @@ const DataTable = () => {
                         <Button
                             className="remove-btn"
                             size="sm"
-                            onClick={() => {
-                                setClients(clients.filter(client => client.id !== id));
-                            }}
+                            onClick={() => onDeleteClick(id)}
                         >מחיקה</Button>
                     </td>
                 </tr>
@@ -53,16 +62,16 @@ const DataTable = () => {
                     </Col>
                     <Col xs="4"></Col>
                     <Col xs="4">
-                        <Button
-                            color="success"
-                            style={{"float": "left", "backgroundColor":"00b074"}}
-                            onClick={() => {
-                                const userName = prompt('Enter Username');
-                                if (userName){
-                                  setClients([...clients, {id: uuid(), userName}])
-                                }
-                            }}
-                        >משימה חדשה</Button>
+                        {/*<Button*/}
+                        {/*    color="success"*/}
+                        {/*    style={{"float": "left", "backgroundColor":"00b074"}}*/}
+                        {/*    onClick={() => {*/}
+                        {/*        const userName = prompt('Enter Username');*/}
+                        {/*        if (userName){*/}
+                        {/*          // setUsers([...users, {id: uuid(), userName}])*/}
+                        {/*        }*/}
+                        {/*    }}*/}
+                        {/*>משימה חדשה</Button>*/}
                     </Col>
                 </Row>
 
@@ -87,4 +96,14 @@ const DataTable = () => {
     )
 }
 
+// DataTable.propTypes = {
+//     getUsers: PropTypes.func.isRequired,
+//     user: PropTypes.object.isRequired
+// }
+
+// const mapStateToProps = (state) => ({
+//     user: state.user
+// })
+
+// export default connect(mapStateToProps, {getUsers})(DataTable);
 export default DataTable;

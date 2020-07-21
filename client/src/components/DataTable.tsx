@@ -1,8 +1,9 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment} from "react";
 import {Table, Container, Row, Col, Button} from "reactstrap";
 
 import {useDispatch, useSelector} from "react-redux";
 import {deleteClient, getClients} from "../actions/clientActions";
+import {DELETE_CLIENT} from "../actions/types";
 
 
 interface ClientObject {
@@ -16,25 +17,16 @@ interface ClientObject {
 
 const DataTable = () => {
 
-    // const [users, setUsers] = useState<Array<ClientObject>>([
-    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    //     {id: uuid(), userName: "אנטון", phone: "054-4228667", mail: "prradd@gmail.com", creationDate: "8.7.2020", actions: "צפיה עריכה מחיקה"},
-    // ])
-    console.log(getClients());
-
-
     const clients = useSelector((state:any) => state.client.clients);
+    const clientsDispatch = useDispatch();
 
     const onDeleteClick = (id: string) => {
-        deleteClient(id);
+        clientsDispatch({type: DELETE_CLIENT, payload: id});
     }
 
     const renderTableData = () => {
         return clients.map((client: ClientObject) => {
-            const {id, userName, phone, mail, creationDate, actions} = client;
+            const {id, userName, phone, mail, creationDate} = client;
             return (
                 <tr key={id} >
                     <td>{userName}</td>

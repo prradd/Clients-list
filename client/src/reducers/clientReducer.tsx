@@ -12,6 +12,7 @@ const initialState = {
 }
 
 export default function (state = initialState, action: any) {
+
    switch (action.type) {
        case GET_CLIENTS:
            // console.log(action);
@@ -20,10 +21,10 @@ export default function (state = initialState, action: any) {
            }
 
        case DELETE_CLIENT:
-           // console.log(action);
+           console.log(action);
            return{
                ...state,
-               items: state.clients.filter(client => client.id !== action.payload)
+               clients: state.clients.filter(client => client.id !== action.payload)
            };
 
        default:

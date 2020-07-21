@@ -1,9 +1,11 @@
-import React, {Fragment} from "react";
+import React, {Dispatch, Fragment} from "react";
 import {Table, Container, Row, Col, Button} from "reactstrap";
 
 import {useDispatch, useSelector} from "react-redux";
-import {deleteClient, getClients} from "../actions/clientActions";
+// import {deleteClient, getClients} from "../actions/clientActions";
 import {DELETE_CLIENT} from "../actions/types";
+import {AppState} from "../reducers";
+import {ClientActions} from "../actions/clientActions";
 
 
 interface ClientObject {
@@ -17,8 +19,8 @@ interface ClientObject {
 
 const DataTable = () => {
 
-    const clients = useSelector((state:any) => state.client.clients);
-    const clientsDispatch = useDispatch();
+    const clients = useSelector((state:AppState) => state.client.clients);
+    const clientsDispatch = useDispatch<Dispatch<ClientActions>>();
 
     const onDeleteClick = (id: string) => {
         clientsDispatch({type: DELETE_CLIENT, payload: id});

@@ -1,5 +1,3 @@
-import {GET_CLIENTS, ADD_CLIENTS, DELETE_CLIENT} from "./types";
-
 export interface IGetClientsAction {
     readonly type: "GET_CLIENTS";
 }

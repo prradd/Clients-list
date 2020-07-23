@@ -2,20 +2,9 @@ import React, {Dispatch, Fragment} from "react";
 import {Table, Container, Row, Col, Button} from "reactstrap";
 
 import {useDispatch, useSelector} from "react-redux";
-// import {deleteClient, getClients} from "../actions/clientActions";
 import {DELETE_CLIENT} from "../actions/types";
 import {AppState} from "../reducers";
 import {ClientActions} from "../actions/clientActions";
-
-
-interface ClientObject {
-    id: string;
-    userName: string;
-    phone?: string;
-    mail?: string;
-    creationDate?: string;
-    actions?: string
-}
 
 const DataTable = () => {
 
@@ -27,7 +16,7 @@ const DataTable = () => {
     }
 
     const renderTableData = () => {
-        return clients.map((client: ClientObject) => {
+        return clients.map((client) => {
             const {id, userName, phone, mail, creationDate} = client;
             return (
                 <tr key={id} >
@@ -90,14 +79,4 @@ const DataTable = () => {
     )
 }
 
-// DataTable.propTypes = {
-//     getUsers: PropTypes.func.isRequired,
-//     user: PropTypes.object.isRequired
-// }
-
-// const mapStateToProps = (state) => ({
-//     user: state.user
-// })
-
-// export default connect(mapStateToProps, {getUsers})(DataTable);
 export default DataTable;

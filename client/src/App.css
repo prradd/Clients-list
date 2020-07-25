@@ -61,3 +61,8 @@ td {
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
   background-color: #028a5c !important;
 }
+
+.modal-header .close {
+   padding: 0 !important;
+   margin: 0 !important;
+}

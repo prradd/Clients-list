@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {DELETE_CLIENT} from "../actions/types";
 import {AppState} from "../reducers";
 import {ClientActions} from "../actions/clientActions";
+import AddClientModal from "./AddClientModal";
 
 const DataTable = () => {
 
@@ -45,6 +46,7 @@ const DataTable = () => {
                     </Col>
                     <Col xs="4"></Col>
                     <Col xs="4">
+                        <AddClientModal />
                         {/*<Button*/}
                         {/*    color="success"*/}
                         {/*    style={{"float": "left", "backgroundColor":"00b074"}}*/}

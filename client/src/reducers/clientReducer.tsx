@@ -1,5 +1,5 @@
 import {v1 as uuid} from "uuid";
-import {GET_CLIENTS, DELETE_CLIENT} from "../actions/types";
+import {GET_CLIENTS, ADD_CLIENT, DELETE_CLIENT} from "../actions/types";
 
 interface IClientObject {
     id: string;
@@ -36,6 +36,12 @@ export default function (state: IClientsState = initialState, action: any) {
            return{
                ...state,
                clients: state.clients.filter(client => client.id !== action.payload)
+           };
+
+       case ADD_CLIENT:
+           return{
+               ...state,
+               clients: [action.payload, ...state.clients]
            };
 
        default:

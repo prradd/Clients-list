@@ -7,6 +7,12 @@ export interface IDeleteClientAction {
     payload: string;
 }
 
+export interface IAddClientAction {
+    readonly type: "ADD_CLIENT";
+    payload: object;
+}
+
 export type ClientActions =
     | IGetClientsAction
     | IDeleteClientAction
+    | IAddClientAction

@@ -10,19 +10,14 @@ import {
     Input
 } from "reactstrap";
 
-import {ADD_CLIENT, IClientObject, ITarget} from "../actions/types";
+import {EDIT_CLIENT, IClientObject, ITarget} from "../actions/types";
 import {useDispatch} from "react-redux";
-import {v1 as uuid} from "uuid";
 import {ClientActions} from "../actions/clientActions";
 
-const AddClientModal = () => {
+const EditClientModal = (initialUser: IClientObject) => {
 
     const [modal, setModal] = useState(false);
-    const [user, setUser] = useState( {
-        userName: '',
-        phone: '',
-        mail: ''
-    });
+    const [user, setUser] = useState(initialUser);
 
     const clientsDispatch = useDispatch<Dispatch<ClientActions>>();
 
@@ -35,21 +30,18 @@ const AddClientModal = () => {
             [e.target.name]: e.target.value})
     }
 
-    const today = new Date();
-    const date = today.getDate() + '.' + (today.getUTCMonth() + 1) + '.' + today.getFullYear();
-
     const onSubmit = (e:any) => {
         e.preventDefault();
 
-        const newClient: IClientObject = {
-            id: uuid(),
+        const editedClient: IClientObject = {
+            id: user.id,
             userName: user.userName,
             phone: user.phone,
             mail: user.mail,
-            creationDate: date
+            creationDate: user.creationDate
         }
 
-        clientsDispatch({type: ADD_CLIENT, payload: newClient});
+        clientsDispatch({type: EDIT_CLIENT, payload: editedClient});
 
         toggle();
     }
@@ -57,10 +49,10 @@ const AddClientModal = () => {
     return (
         <div>
             <Button
-                color="success"
-                style={{"float": "left", "backgroundColor":"00b074"}}
+                className="remove-btn"
+                size="sm"
                 onClick={toggle}
-            >משימה חדשה</Button>
+            >עריכה</Button>
             <Modal
                 isOpen={modal}
                 toggle={toggle}
@@ -74,6 +66,7 @@ const AddClientModal = () => {
                                 type="text"
                                 name="userName"
                                 id="clientUserName"
+                                value={user.userName}
                                 onChange={onChange}
                             />
                             <Label for="phone">טלפון</Label>
@@ -81,6 +74,7 @@ const AddClientModal = () => {
                                 type="text"
                                 name="phone"
                                 id="clientPhone"
+                                value={user.phone}
                                 onChange={onChange}
                             />
                             <Label for="mail">מייל</Label>
@@ -88,13 +82,14 @@ const AddClientModal = () => {
                                 type="text"
                                 name="mail"
                                 id="clientMail"
+                                value={user.mail}
                                 onChange={onChange}
                             />
                             <Button
                                 color="success"
                                 style={{marginTop: '2rem'}}
                                 block
-                            >הוספ/י משימה</Button>
+                            >שמירה</Button>
                         </FormGroup>
                     </Form>
                 </ModalBody>
@@ -103,4 +98,4 @@ const AddClientModal = () => {
     )
 }
 
-export default AddClientModal
+export default EditClientModal

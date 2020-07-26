@@ -1,18 +1,6 @@
 import {v1 as uuid} from "uuid";
-import {GET_CLIENTS, ADD_CLIENT, DELETE_CLIENT} from "../actions/types";
+import {GET_CLIENTS, ADD_CLIENT, DELETE_CLIENT, IClientsState, EDIT_CLIENT, IClientObject} from "../actions/types";
 
-interface IClientObject {
-    id: string;
-    userName: string;
-    phone?: string;
-    mail?: string;
-    creationDate?: string;
-    actions?: string
-}
-
-interface IClientsState {
-    clients: Array<IClientObject>;
-}
 
 const initialState: IClientsState = {
     clients: [
@@ -42,6 +30,14 @@ export default function (state: IClientsState = initialState, action: any) {
            return{
                ...state,
                clients: [action.payload, ...state.clients]
+           };
+
+       case EDIT_CLIENT:
+           const indexOfEdited = state.clients.findIndex((client: IClientObject) => client.id === action.payload.id);
+           state.clients[indexOfEdited] = action.payload;
+           return{
+               ...state,
+               clients: [...state.clients]
            };
 
        default:

@@ -6,6 +6,7 @@ import {DELETE_CLIENT} from "../actions/types";
 import {AppState} from "../reducers";
 import {ClientActions} from "../actions/clientActions";
 import AddClientModal from "./AddClientModal";
+import EditClientModal from "./EditClientModal";
 
 const DataTable = () => {
 
@@ -26,11 +27,20 @@ const DataTable = () => {
                     <td>{mail}</td>
                     <td>{creationDate}</td>
                     <td>
-                        <Button
-                            className="remove-btn"
-                            size="sm"
-                            onClick={() => onDeleteClick(id)}
-                        >מחיקה</Button>
+                        <Row>
+                            <Button
+                                className="remove-btn"
+                                size="sm"
+                                onClick={() => onDeleteClick(id)}
+                            >מחיקה</Button>
+                            <EditClientModal
+                                id={id}
+                                userName={userName}
+                                phone={phone}
+                                mail={mail}
+                                creationDate={creationDate}
+                            />
+                        </Row>
                     </td>
                 </tr>
             )
@@ -47,16 +57,6 @@ const DataTable = () => {
                     <Col xs="4"></Col>
                     <Col xs="4">
                         <AddClientModal />
-                        {/*<Button*/}
-                        {/*    color="success"*/}
-                        {/*    style={{"float": "left", "backgroundColor":"00b074"}}*/}
-                        {/*    onClick={() => {*/}
-                        {/*        const userName = prompt('Enter Username');*/}
-                        {/*        if (userName){*/}
-                        {/*          // setUsers([...users, {id: uuid(), userName}])*/}
-                        {/*        }*/}
-                        {/*    }}*/}
-                        {/*>משימה חדשה</Button>*/}
                     </Col>
                 </Row>
 

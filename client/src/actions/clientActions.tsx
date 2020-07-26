@@ -12,7 +12,13 @@ export interface IAddClientAction {
     payload: object;
 }
 
+export interface IEditClientAction {
+    readonly type: "EDIT_CLIENT";
+    payload: object;
+}
+
 export type ClientActions =
     | IGetClientsAction
     | IDeleteClientAction
     | IAddClientAction
+    | IEditClientAction

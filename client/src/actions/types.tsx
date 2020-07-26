@@ -10,3 +10,16 @@ export interface ITarget {
     };
     preventDefault(): void;
 }
+
+export interface IClientObject {
+    id: string;
+    userName: string;
+    phone?: string;
+    mail?: string;
+    creationDate?: string;
+    actions?: string
+}
+
+export interface IClientsState {
+    clients: Array<IClientObject>;
+}

@@ -10,10 +10,11 @@ import {
     Input
 } from "reactstrap";
 
-import {ADD_CLIENT, IClientObject, ITarget} from "../actions/types";
+import {ADD_CLIENT, IClientObject, ITarget, ClientActions} from "../actions/types";
 import {useDispatch} from "react-redux";
-import {v1 as uuid} from "uuid";
-import {ClientActions} from "../actions/clientActions";
+import axios from "axios";
+
+// import {addClient} from "../actions/clientActions";
 
 const AddClientModal = () => {
 
@@ -42,14 +43,23 @@ const AddClientModal = () => {
         e.preventDefault();
 
         const newClient: IClientObject = {
-            id: uuid(),
             userName: user.userName,
             phone: user.phone,
             mail: user.mail,
             creationDate: date
         }
 
-        clientsDispatch({type: ADD_CLIENT, payload: newClient});
+        axios
+            .post('/api/clients', newClient)
+            .then(res =>
+                clientsDispatch({
+                    type: ADD_CLIENT,
+                    payload: res.data
+                })
+            )
+            .catch(err =>
+                console.log(err)
+            );
 
         toggle();
     }

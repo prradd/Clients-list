@@ -2,7 +2,7 @@ import express from "express";
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 
-const users = require("./routes/api/users")
+const clients = require("./routes/api/clients")
 
 const app: express.Application = express();
 
@@ -21,7 +21,7 @@ mongoose
     .catch((err: any) => console.log(err));
 
 // Use Routes
-app.use('/api/users', users);
+app.use('/api/clients', clients);
 
 const port = process.env.PORT || 7000;
 

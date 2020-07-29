@@ -1,24 +1,38 @@
-export interface IGetClientsAction {
-    readonly type: "GET_CLIENTS";
-}
+import React from "react";
+// import {GET_CLIENTS, IClientObject, IClientsState} from "./types";
+// import axios from "axios";
+//
+// export const getClients = () => (dispatch: Function) => {
+//     // dispatch(setClientsLoading());
+//     axios
+//         .get('/api/clients')
+//         .then(res =>
+//             dispatch({
+//                 type: "GET_CLIENTS",
+//                 payload: res.data
+//         })
+//         )
+//         .catch(err => console.log(err))
+// }
+//
+// export const addClient = (clientsDispatch: Function, newClient: IClientObject) => {
+//     axios
+//         .post('/api/clients', newClient)
+//         .then(res =>
+//             clientsDispatch({
+//                 type: "ADD_CLIENT",
+//                 payload: res.data
+//             })
+//         )
+//         .catch(err => console.log(err))
+// }
+//
+// export const setClientsLoading = () => {
+//     return {
+//         type: "CLIENTS_LOADING"
+//     }
+// }
 
-export interface IDeleteClientAction {
-    readonly type: "DELETE_CLIENT";
-    payload: string;
-}
 
-export interface IAddClientAction {
-    readonly type: "ADD_CLIENT";
-    payload: object;
-}
 
-export interface IEditClientAction {
-    readonly type: "EDIT_CLIENT";
-    payload: object;
-}
 
-export type ClientActions =
-    | IGetClientsAction
-    | IDeleteClientAction
-    | IAddClientAction
-    | IEditClientAction

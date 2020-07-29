@@ -10,11 +10,11 @@ import {
     Input
 } from "reactstrap";
 
-import {EDIT_CLIENT, IClientObject, ITarget} from "../actions/types";
+import {EDIT_CLIENT, ITarget, ClientActions, IClientObjectExist} from "../actions/types";
 import {useDispatch} from "react-redux";
-import {ClientActions} from "../actions/clientActions";
+import axios from "axios";
 
-const EditClientModal = (initialUser: IClientObject) => {
+const EditClientModal = (initialUser: IClientObjectExist) => {
 
     const [modal, setModal] = useState(false);
     const [user, setUser] = useState(initialUser);
@@ -33,15 +33,25 @@ const EditClientModal = (initialUser: IClientObject) => {
     const onSubmit = (e:any) => {
         e.preventDefault();
 
-        const editedClient: IClientObject = {
-            id: user.id,
+        const editedClient: IClientObjectExist = {
+            _id: user._id,
             userName: user.userName,
             phone: user.phone,
             mail: user.mail,
             creationDate: user.creationDate
         }
 
-        clientsDispatch({type: EDIT_CLIENT, payload: editedClient});
+        axios
+            .put(`/api/clients/${user._id}`, editedClient)
+            .then((res: any) =>
+                    clientsDispatch({
+                        type: EDIT_CLIENT,
+                        payload: res.data
+                    })
+            )
+            .catch(err =>
+                console.log(err)
+            );
 
         toggle();
     }

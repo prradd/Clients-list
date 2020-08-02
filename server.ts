@@ -1,6 +1,5 @@
 import express from "express";
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
 const path = require('path');
 
 const clients = require("./routes/api/clients")
@@ -8,7 +7,7 @@ const clients = require("./routes/api/clients")
 const app: express.Application = express();
 
 // Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // DB Config
 const db = require('./config/keys.ts');

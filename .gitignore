@@ -4,6 +4,6 @@ build/
 
 .idea/
 
-congig/keys.ts
+config/keys.ts
 
 npm-debug.log

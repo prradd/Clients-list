@@ -2,16 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 // Client Model
-const Client = require('../../models/Client');
+const model = require('../../libs/mongo/model')
 
 // @route GET api/clients
 // @desc Get All Clients
 // @access Public
 
 router.get('/', (req: any, res: any) => {
-    Client.find()
-        .sort({ date: -1 })
-        .then((clients: any) => res.json(clients))
+    model.getClients(null, (err: any, clients: any) => res.json(clients))
 });
 
 // @route POST api/clients
@@ -19,13 +17,8 @@ router.get('/', (req: any, res: any) => {
 // @access Public
 
 router.post('/', (req: any, res: any) => {
-    const newClient = new Client({
-        userName: req.body.userName,
-        mail: req.body.mail,
-        phone: req.body.phone
-    });
-
-    newClient.save().then((client: any) => res.json(client));
+    const { userName, mail, phone } = req.body
+    model.addClient({ userName, mail, phone }, (err: any, client: any) => res.json(client))
 });
 
 // @route DELETE api/clients/:id
@@ -33,11 +26,13 @@ router.post('/', (req: any, res: any) => {
 // @access Public
 
 router.delete('/:id', (req: any, res: any) => {
-    Client.findById(req.params.id)
-        .then((client: any) => client.remove().then(() => res.json({success: true})))
-        .catch((err: any) => {
-            return res.status(404).json({success: false});
-        });
+    model.removeClient({_id: req.params.id}, (err: any) => {
+        if (err) {
+            res.status(404).json({success: false})
+        } else {
+            res.json({success: true})
+        }
+    })
 })
 
 // @route PUT api/clients/:id
@@ -51,15 +46,14 @@ router.put('/:id', (req: any, res: any) => {
         phone: req.body.phone
     };
 
-    Client.findByIdAndUpdate(
-        {_id: req.params.id},
-        {$set: editedClient},
-        {"new": true})
-        // .exec()
-        .then((client: any) => res.json(client))
-        .catch((err: any) => {
-            return res.status(404).json({success: false});
-        });
+    const { userName, mail, phone } = req.body
+    model.updateClient({_id: req.params.id}, { userName, mail, phone }, (err: any, client:any) => {
+        if (err) {
+            res.status(404).json({success: false})
+        } else {
+            res.json(client)
+        }
+    })
 })
 
 module.exports = router;

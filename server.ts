@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require('path');
 
 const clients = require("./routes/api/clients")
+const mongo = require('./libs/mongo');
 
 const app: express.Application = express();
 
@@ -10,16 +11,10 @@ const app: express.Application = express();
 app.use(express.json());
 
 // DB Config
-const db = require('./config/keys.ts');
+const config = require('./config')[process.env.PROFILE || 'dev'];
 
 // Connect to Mongo
-mongoose
-    .connect(db.mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false })
-    .then(() => console.log('MongoDB Connected...'))
-    .catch((err: any) => console.log(err));
+mongo(config.mongo)
 
 // Use Routes
 app.use('/api/clients', clients);

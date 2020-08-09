@@ -1,32 +1,26 @@
 {
   "dev": {
     "mongo": {
-      "hosts": [ "localhost" ],
+      "format": "mongodb+srv",
+      "host": "localhost",
       "port": "27017",
-      "database": "user-info",
+      "database": "propit-assignment-test",
       "admin-db": "admin"
     }
   },
-  "stage": {
+  "unit-test": {
     "mongo": {
-      "hosts": [ "172.22.64.29", "172.22.64.112" ],
+      "host": "localhost",
       "port": "27017",
-      "database": "user-info",
-      "admin-db": "admin",
-      "rsName": "rs0"
+      "database": "propit-assignment-test",
+      "admin-db": "admin"
     }
   },
   "prod": {
     "mongo": {
-      "hosts": [
-        "172.22.80.15",
-        "172.22.80.19",
-        "172.22.80.18"
-      ],
-      "port": "27017",
-      "database": "user-info",
-      "admin-db": "user-info",
-      "rsName": "rs0"
+      "host": "propit-assignment.xnmfo.mongodb.net",
+      "database": "<dbname>?retryWrites=true&w=majority",
+      "port": ""
     }
   }
 }

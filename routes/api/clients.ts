@@ -40,11 +40,6 @@ router.delete('/:id', (req: any, res: any) => {
 // @access Public
 
 router.put('/:id', (req: any, res: any) => {
-    const editedClient = {
-        userName: req.body.userName,
-        mail: req.body.mail,
-        phone: req.body.phone
-    };
 
     const { userName, mail, phone } = req.body
     model.updateClient({_id: req.params.id}, { userName, mail, phone }, (err: any, client:any) => {

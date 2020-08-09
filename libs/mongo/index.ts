@@ -1,18 +1,26 @@
+export {};
 const mongoose = require('mongoose');
 
-module.exports = config => {
+interface IDBConfig {
+	port?: string;
+	host: string;
+	database: string;
+	["admin-db"]?: string;
+}
+
+module.exports = (config: IDBConfig) => {
 	const connection = mongoose.connection;
 
 	const { MONGO_USER, MONGO_PASS } = process.env;
-	const { port, hosts, 'admin-db': db, database, rsName, } = config;
-	const connString = db
-		? `mongodb://${MONGO_USER}:${MONGO_PASS}@${hosts.map(host => `${host}:${port}`).join(',')}/${database}?authSource=${db}${rsName ? `&replicaSet=${rsName}` : ''}`
-		: `mongodb://${hosts.map(host => `${host}:${port}`).join(',')}/${database}`;
+	const { port, host, 'admin-db': db, database } = config;
+	const connString = port
+		? `mongodb://${MONGO_USER}:${MONGO_PASS}@${host}:port/${database}?authSource=${db}` // connect to localhost
+		: `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${host}/${database}`; // connect to Mongodb Atlas
 
 	connection.on('connecting', () => {
 		console.info('Connecting to MongoDB on port %d', port);
 	});
-	connection.on('error', error => {
+	connection.on('error', (error: string | symbol) => {
 		console.error('Error in MongoDB connection: %O', error);
 		mongoose.disconnect();
 	});
@@ -30,10 +38,7 @@ module.exports = config => {
 	});
 
 	mongoose.connect(connString, {
-		db: {
-			readPreference: 'secondaryPreferred'
-		},
-		autoReconnect: true,
+		useUnifiedTopology: true,
 		useNewUrlParser: true,
 		useFindAndModify: false
 	});

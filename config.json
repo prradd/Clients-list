@@ -1,10 +1,9 @@
 {
   "dev": {
     "mongo": {
-      "format": "mongodb+srv",
       "host": "localhost",
       "port": "27017",
-      "database": "propit-assignment-test",
+      "database": "clients-list",
       "admin-db": "admin"
     }
   },
@@ -12,14 +11,14 @@
     "mongo": {
       "host": "localhost",
       "port": "27017",
-      "database": "propit-assignment-test",
+      "database": "clients-list-test",
       "admin-db": "admin"
     }
   },
   "prod": {
     "mongo": {
-      "host": "propit-assignment.xnmfo.mongodb.net",
-      "database": "<dbname>?retryWrites=true&w=majority",
+      "host": "anton-sandbox.xnmfo.mongodb.net",
+      "database": "clients-list?retryWrites=true&w=majority",
       "port": ""
     }
   }

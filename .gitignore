@@ -7,3 +7,5 @@ build/
 config/keys.ts
 
 npm-debug.log
+
+.env-cmdrc

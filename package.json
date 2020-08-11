@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm i --prefix client",
+    "start": "ts-node server.ts",
     "server": "env-cmd -e dev nodemon",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

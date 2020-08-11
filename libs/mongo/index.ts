@@ -14,8 +14,6 @@ module.exports = () => {
 		// (mongodb+srv://<user>:<pass>@anton-sandbox.xnmfo.mongodb.net/clients-list?retryWrites=true&w=majority)
 		: `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DATABASE}`;
 
-	console.log(connString);
-
 	connection.on('connecting', () => {
 		console.info('Connecting to MongoDB on port %d', MONGO_PORT);
 	});

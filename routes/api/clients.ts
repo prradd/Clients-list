@@ -1,3 +1,5 @@
+import {IClientObjectExist} from "../../types";
+
 const express = require('express');
 const router = express.Router();
 
@@ -9,7 +11,7 @@ const model = require('../../libs/mongo/model')
 // @access Public
 
 router.get('/', (req: any, res: any) => {
-    model.getClients(null, (err: any, clients: any) => res.json(clients))
+    model.getClients({}, (err: any, clients: Array<IClientObjectExist> | null) => res.json(clients))
 });
 
 // @route POST api/clients

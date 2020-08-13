@@ -1,26 +1,14 @@
 import express from "express";
 const path = require('path');
 
-const clients = require("./routes/api/clients")
-const mongo = require('./libs/mongo');
-
-const app: express.Application = express();
-
-// Bodyparser Middleware
-app.use(express.json());
-
-// Connect to Mongo
-mongo();
-
-// Use Routes
-app.use('/api/clients', clients);
+const app = require('./app')
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
         // Set static folder
         app.use(express.static('client/build'));
 
-        app.get('*', (req, res) => {
+        app.get('*', (req: any, res: any) => {
                 res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
         })
 }

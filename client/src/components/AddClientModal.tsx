@@ -81,6 +81,7 @@ const AddClientModal = () => {
                         <FormGroup>
                             <Label for="userName">שם משתמש</Label>
                             <Input
+                                required
                                 type="text"
                                 name="userName"
                                 id="clientUserName"

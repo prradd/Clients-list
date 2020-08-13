@@ -5,11 +5,11 @@ const clientSchema = require('./clinetSchema');
 
 const Clients = mongoose.model('client', clientSchema, 'clients');
 
-const addClient = (clientData: IClientObject, callback: IClientObjectExist | string) => {
+const addClient = (clientData: IClientObject, callback: any) => {
 	Clients.create(clientData, callback)
 }
 
-const getClients = (conditions = {}, callback: Array<IClientObjectExist> | null) => {
+const getClients = (conditions = {}, callback: any) => {
 	Clients.find(conditions, callback).sort({ date: -1 })
 }
 

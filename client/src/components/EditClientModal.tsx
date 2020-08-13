@@ -73,6 +73,7 @@ const EditClientModal = (initialUser: IClientObjectExist) => {
                         <FormGroup>
                             <Label for="userName">שם משתמש</Label>
                             <Input
+                                required
                                 type="text"
                                 name="userName"
                                 id="clientUserName"

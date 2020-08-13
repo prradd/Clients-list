@@ -9,6 +9,7 @@
     "server": "env-cmd -e dev nodemon",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "env-cmd -e unit-test jest tests --watch",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Anton Shestakov",
@@ -27,7 +28,11 @@
     "typescript": "^3.9.6"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.9",
+    "@types/supertest": "^2.0.10",
     "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.2.0"
   }
 }

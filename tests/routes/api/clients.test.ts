@@ -133,9 +133,10 @@ test('PUT to /api/clients/ with client id and client object' +
 
 })
 
-afterAll( done => {
+afterAll( async done=> {
     console.warn = jest.fn();
-    mongoose.connection.close();
+    await Client.deleteMany({});
+    await mongoose.connection.close();
     expect(console.warn).toHaveBeenCalled(); // warn when mongo is disconnected
     done();
 })

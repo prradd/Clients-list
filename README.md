@@ -17,7 +17,7 @@ Run both the Server and the Client using "concurrently"<br>
 Run the tests<br>
 `npm run test` or `npm t`
 
-###Important
+### Important
 **MongoDB instance has to be connected**<br>
 You may rename the file `.env-cmdrc-sample` to `.env-cmdrc` and put the credentials for connection in the **dev** section.<br>
 The script will run with `env-cmd -e dev` command which parses the file and adds the variables to GLOBAL env.<br>

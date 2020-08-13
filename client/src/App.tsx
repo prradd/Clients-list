@@ -21,9 +21,6 @@ const App = () => {
               </nav>
               <main>
                   <h1>ניהול משימות</h1>
-                  <div>
-                      חיפוש
-                  </div>
                   <DataTable></DataTable>
               </main>
           </Fragment>

@@ -21,7 +21,7 @@ const AppNavbar = () => {
         <div>
             <Navbar color="light" light expand="sm" className="mb-5">
                 <Container>
-                    <NavbarBrand href="/">PROPiT</NavbarBrand>
+                    <NavbarBrand href="/"><b>אנטון שסטקוב</b></NavbarBrand>
                     <NavbarToggler onClick={toggle}/>
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto">

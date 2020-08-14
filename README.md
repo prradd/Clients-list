@@ -6,7 +6,7 @@ It was a good brief, and I saw here an opportunity to learn important technology
 I've decided to add Unit Testing to the project (started with server side, to test the routes). Used Jest for this purpose.
 Live sample of the project, can be found <a href="https://stormy-retreat-20506.herokuapp.com/">HERE</a>. 
 
-The scripts to install and run the app could be found in package.json file, after the "clone" is done:
+All the scripts to install and run the app are located in package.json file. After the "clone" is done:
 
 Install dependencies for both Server and Client<br>
 `npm run install-all`

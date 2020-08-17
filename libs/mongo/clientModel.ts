@@ -1,7 +1,7 @@
 export {};
-import {IClientObject, IClientObjectExist} from "../../types";
+import {IClientObject} from "../../types";
 const mongoose = require('mongoose');
-const clientSchema = require('./clinetSchema');
+const clientSchema = require('./clientSchema');
 
 const Clients = mongoose.model('client', clientSchema, 'clients');
 
@@ -17,7 +17,7 @@ const removeClient = (conditions: Object, callback: any) => {
 	Clients.findOneAndRemove(conditions, callback)
 }
 
-const updateClient = (conditions: Object, newData: IClientObjectExist, callback: any) => {
+const updateClient = (conditions: Object, newData: IClientObject, callback: any) => {
 	Clients.findOneAndUpdate(conditions, newData, {"new": true}, callback)
 }
 

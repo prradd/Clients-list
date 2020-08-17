@@ -37,7 +37,8 @@ module.exports = () => {
 	mongoose.connect(connString, {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
-		useFindAndModify: false
+		useFindAndModify: false,
+		useCreateIndex: true
 	});
 	mongoose.Promise = global.Promise;
 };

@@ -10,5 +10,12 @@ export interface IClientObjectExist extends IClientObject {
     _id: string;
 }
 
+export interface IUserObject {
+    userName: string;
+    mail: string;
+    pass: string,
+    creationDate?: string;
+}
+
 
 

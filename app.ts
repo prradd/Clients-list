@@ -1,6 +1,5 @@
 import express from "express";
 
-const clients = require("./routes/api/clients")
 const mongo = require('./libs/mongo');
 
 const app: express.Application = express();
@@ -12,6 +11,8 @@ app.use(express.json());
 mongo();
 
 // Use Routes
-app.use('/api/clients', clients);
+app.use('/api/clients', require("./routes/api/clients"));
+app.use('/api/users', require("./routes/api/users"));
+app.use('/api/auth', require("./routes/api/auth"));
 
 module.exports = app

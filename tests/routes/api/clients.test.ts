@@ -3,8 +3,13 @@ const request = require('supertest');
 const app = require('../../../app');
 const mongoose = require('mongoose');
 
-const clientSchema = require('../../../libs/mongo/clinetSchema');
-const Client = mongoose.model('client', clientSchema, 'clients')
+const clientSchema = require('../../../libs/mongo/clientSchema');
+const Client = mongoose.model('client', clientSchema, 'clients');
+
+// const auth = jest.fn((req: any, res: any, next: Function) => {
+//     next();
+// })
+
 
 const testClient1 = {
     userName: "test1",
@@ -31,7 +36,7 @@ beforeAll(async () => {
     await Client.deleteMany({});
     await Client(testClient1).save();
     await Client(testClient2).save();
-    expect(console.info).toHaveBeenCalled() // console.info about the mongo connection
+    // expect(console.info).toHaveBeenCalled() // console.info about the mongo connection
 })
 
 test('GET to /api/clients - Should respond with an array of clients', async () => {
@@ -52,8 +57,9 @@ test('POST to /api/clients with userName, mail and phone ' +
                 userName: "אנטון",
                 mail: "test@gmail.com",
                 phone: "0544228667"
-            }
+            },
         )
+        .set('x-auth-token', 'test')
         .expect('Content-Type', /json/)
         .expect(200);
 

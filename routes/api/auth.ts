@@ -57,6 +57,5 @@ router.get('/user', auth, (req: any, res: any) => {
     model.findUser(req.user._id, res);
 });
 
-
 module.exports = router;
 

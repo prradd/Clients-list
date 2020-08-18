@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 const clientSchema = require('../../../libs/mongo/clientSchema');
 const Client = mongoose.model('client', clientSchema, 'clients');
 
-// const auth = jest.fn((req: any, res: any, next: Function) => {
-//     next();
-// })
-
+// Auth middleware will be mocked here and tested separately
+jest.mock('../../../middleware/auth', () => {
+    return jest.fn((req: any, res: any, next: Function) => next()) ;
+})
 
 const testClient1 = {
     userName: "test1",
@@ -26,6 +26,10 @@ const testClient3 = {
     mail: "test3@test.com",
     phone: "0544228667"
 }
+
+beforeEach(() => {
+    jest.resetModules();
+});
 
 beforeAll( done => {
     done()
@@ -59,7 +63,6 @@ test('POST to /api/clients with userName, mail and phone ' +
                 phone: "0544228667"
             },
         )
-        .set('x-auth-token', 'test')
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -70,6 +73,7 @@ test('POST to /api/clients with userName, mail and phone ' +
     expect(resBody).toHaveProperty("userName", "אנטון");
     expect(resBody).toHaveProperty("mail", "test@gmail.com");
     expect(resBody).toHaveProperty("phone", "0544228667");
+
 })
 
 test('POST to /api/clients with no userName - should return empty string', async () => {
@@ -139,11 +143,15 @@ test('PUT to /api/clients/ with client id and client object' +
 
 })
 
-afterAll( async done=> {
+afterAll( async done => {
     console.warn = jest.fn();
     await Client.deleteMany({});
     await mongoose.connection.close();
     expect(console.warn).toHaveBeenCalled(); // warn when mongo is disconnected
+
+    jest.resetModules()
+    jest.restoreAllMocks()
+
     done();
 })
 

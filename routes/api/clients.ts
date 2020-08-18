@@ -29,7 +29,7 @@ router.post('/', auth, (req: any, res: any) => {
 // @desc Delete a Client
 // @access Private
 
-router.delete('/:id',  (req: any, res: any) => {
+router.delete('/:id', auth,  (req: any, res: any) => {
     model.removeClient({_id: req.params.id}, (err: any) => {
         if (err) {
             res.status(404).json({success: false})
@@ -43,7 +43,7 @@ router.delete('/:id',  (req: any, res: any) => {
 // @desc Edit a Client
 // @access Private
 
-router.put('/:id', (req: any, res: any) => {
+router.put('/:id', auth, (req: any, res: any) => {
 
     const { userName, mail, phone } = req.body
     model.updateClient({_id: req.params.id}, { userName, mail, phone }, (err: any, client:any) => {

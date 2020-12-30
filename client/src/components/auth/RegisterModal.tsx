@@ -7,19 +7,25 @@ import {
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    NavLink
 } from "reactstrap";
 
-import {ITarget, ClientActions, IClientObjectExist} from "../actions/types";
+import {ITarget, AuthActions, ErrorActions} from "../../actions/types";
 import {useDispatch} from "react-redux";
-import {editClient} from "../actions/clientActions";
 
-const EditClientModal = (initialUser: IClientObjectExist) => {
+const RegisterModal = () => {
 
     const [modal, setModal] = useState(false);
-    const [user, setUser] = useState(initialUser);
+    const [msg, setMsg] = useState(null);
+    const [user, setUser] = useState( {
+        userName: '',
+        mail: '',
+        password: ''
+    });
 
-    const clientsDispatch = useDispatch<Dispatch<ClientActions>>();
+    const authDispatch = useDispatch<Dispatch<AuthActions>>();
+    const errorsDispatch = useDispatch<Dispatch<ErrorActions>>();
 
     const toggle = () => {
         setModal(!modal);
@@ -30,34 +36,27 @@ const EditClientModal = (initialUser: IClientObjectExist) => {
             [e.target.name]: e.target.value})
     }
 
+    const today = new Date();
+    const date = today.getDate() + '.' + (today.getUTCMonth() + 1) + '.' + today.getFullYear();
+
     const onSubmit = (e:any) => {
         e.preventDefault();
 
-        const editedClient: IClientObjectExist = {
-            _id: user._id,
-            userName: user.userName,
-            phone: user.phone,
-            mail: user.mail,
-            creationDate: user.creationDate
-        }
 
-        editClient(clientsDispatch, editedClient)
 
         toggle();
     }
 
     return (
         <div>
-            <Button
-                className="remove-btn"
-                size="sm"
-                onClick={toggle}
-            >עריכה</Button>
+            <NavLink onClick={toggle} href="#">
+                הרשמה
+            </NavLink>
             <Modal
                 isOpen={modal}
                 toggle={toggle}
             >
-                <ModalHeader toggle={toggle}>הוספת משימה חדשה</ModalHeader>
+                <ModalHeader toggle={toggle}>הרשמה</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={onSubmit}>
                         <FormGroup>
@@ -66,31 +65,32 @@ const EditClientModal = (initialUser: IClientObjectExist) => {
                                 required
                                 type="text"
                                 name="userName"
-                                id="clientUserName"
-                                value={user.userName}
-                                onChange={onChange}
-                            />
-                            <Label for="phone">טלפון</Label>
-                            <Input
-                                type="text"
-                                name="phone"
-                                id="clientPhone"
-                                value={user.phone}
+                                id="userUserName"
+                                className="mb-4"
                                 onChange={onChange}
                             />
                             <Label for="mail">מייל</Label>
                             <Input
                                 type="text"
                                 name="mail"
-                                id="clientMail"
-                                value={user.mail}
+                                id="userMail"
+                                className="mb-4"
                                 onChange={onChange}
                             />
+                            <Label for="password">ססמא</Label>
+                            <Input
+                                type="password"
+                                name="password"
+                                id="userPassword"
+                                className="mb-4"
+                                onChange={onChange}
+                            />
+
                             <Button
                                 color="success"
                                 style={{marginTop: '2rem'}}
                                 block
-                            >שמירה</Button>
+                            >רישום</Button>
                         </FormGroup>
                     </Form>
                 </ModalBody>
@@ -99,4 +99,4 @@ const EditClientModal = (initialUser: IClientObjectExist) => {
     )
 }
 
-export default EditClientModal
+export default RegisterModal

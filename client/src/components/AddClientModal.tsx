@@ -10,11 +10,9 @@ import {
     Input
 } from "reactstrap";
 
-import {ADD_CLIENT, IClientObject, ITarget, ClientActions} from "../actions/types";
+import {IClientObject, ITarget, ClientActions} from "../actions/types";
 import {useDispatch} from "react-redux";
-import axios from "axios";
-
-// import {addClient} from "../actions/clientActions";
+import {addClient} from "../actions/clientActions";
 
 const AddClientModal = () => {
 
@@ -49,17 +47,7 @@ const AddClientModal = () => {
             creationDate: date
         }
 
-        axios
-            .post('/api/clients', newClient)
-            .then(res =>
-                clientsDispatch({
-                    type: ADD_CLIENT,
-                    payload: res.data
-                })
-            )
-            .catch(err =>
-                console.log(err)
-            );
+        addClient(clientsDispatch, newClient);
 
         toggle();
     }

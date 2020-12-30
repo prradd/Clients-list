@@ -24,6 +24,9 @@ export interface ITarget {
     preventDefault(): void;
 }
 
+
+// Client Interfaces and types
+
 export interface IClientObject {
     userName: string;
     phone?: string;
@@ -71,3 +74,64 @@ export type ClientActions =
     | IAddClientAction
     | IEditClientAction
     | ISetClientsLoading
+
+
+// Auth interfaces and types
+export interface IUserObject {
+    userName: string;
+    mail: string;
+    password: string;
+}
+
+export interface IAuthObject {
+    token: string | null;
+    isAuthenticated: boolean | null;
+    isLoading: boolean;
+    user: IUserObject | null;
+}
+
+export interface ISetUserLoading {
+    readonly type: "USER_LOADING";
+}
+
+export interface ISetUserLoaded {
+    readonly type: "USER_LOADED";
+    payload: object;
+}
+
+export interface ISetLoginSuccess {
+    readonly type: "LOGIN_SUCCESS";
+    payload: object;
+}
+
+export interface ISetRegisterSuccess {
+    readonly type: "REGISTER_SUCCESS";
+    payload: object;
+}
+
+export type AuthActions =
+    | ISetUserLoading
+    | ISetUserLoaded
+    | ISetLoginSuccess
+    | ISetRegisterSuccess
+
+
+// Error interfaces and types
+
+export interface IGetErrorsAction {
+    readonly type: "GET_ERRORS";
+    payload: object;
+}
+
+export interface IClearErrorsAction {
+    readonly type: "CLEAR_ERRORS";
+}
+
+export type ErrorActions =
+    | IGetErrorsAction
+    | IClearErrorsAction
+
+
+
+
+

@@ -1,12 +1,11 @@
 import React, {Dispatch, Fragment, useEffect} from "react";
 import {Table, Container, Row, Col, Button} from "reactstrap";
-
 import {useDispatch, useSelector} from "react-redux";
-import {GET_CLIENTS, DELETE_CLIENT, ClientActions, IClientObjectExist} from "../actions/types";
+import {ClientActions, IClientObjectExist} from "../actions/types";
 import {AppState} from "../reducers";
 import AddClientModal from "./AddClientModal";
 import EditClientModal from "./EditClientModal";
-import axios from "axios";
+import {deleteClient, getClients} from "../actions/clientActions";
 
 const DataTable = () => {
 
@@ -14,33 +13,11 @@ const DataTable = () => {
     const clientsDispatch = useDispatch<Dispatch<ClientActions>>();
 
     useEffect(() =>{
-        clientsDispatch({type: "CLIENTS_LOADING"})
-        axios
-            .get('/api/clients')
-            .then(res =>
-                clientsDispatch({
-                    type: GET_CLIENTS,
-                    payload: res.data
-                })
-            )
-            .catch(err =>
-                console.log(err)
-            );
-
+        getClients(clientsDispatch)
     }, [clientsDispatch]);
 
     const onDeleteClick = (id: string) => {
-        axios
-            .delete(`/api/clients/${id}`)
-            .then(() =>
-                clientsDispatch({
-                    type: DELETE_CLIENT,
-                    payload: id
-                })
-            )
-            .catch(err =>
-                console.log(err)
-            );
+        deleteClient(clientsDispatch, id);
     }
 
     const formatDate = (creationDate: string) => {

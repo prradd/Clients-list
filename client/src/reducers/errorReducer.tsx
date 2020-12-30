@@ -1,6 +1,6 @@
 import {
     GET_ERRORS,
-    CLEAR_ERRORS, IClientsState
+    CLEAR_ERRORS
 } from "../actions/types";
 
 const initialState: any = {

@@ -9,3 +9,5 @@ config/keys.ts
 npm-debug.log
 
 .env-cmdrc
+
+package-lock.json
